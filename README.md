@@ -18,12 +18,12 @@ Build:
 ----
 
 Run the following to prepare your system:
-## arch:
+## Arch:
 ```bash
 sudo pacman -S make cmake cuda
 ````
 
-## nix:
+## Nix:
 ```bash
 nix-shell
 ```
