@@ -104,10 +104,16 @@ __global__ void mul_fp(limb_t *out) {
 
 __global__ void sqr_fp(limb_t *out) {
     int i = blockIdx.x * blockDim.x + threadIdx.x;
-    limb_t c;
-    
-    __sqr_fp(c.x,c.y,c.z,a[i].x,a[i].y,a[i].z,__mu.x,__mu.y,__mu.z,__p.x,__p.y,__p.z);
-    out[i] = c;
+    limb_t c[LIMBS] = {0};
+
+    __fp_sqr7x7_32(c[0], c[1], c[2], c[3], c[4], c[5], c[6],
+				  a[i][0], a[i][1], a[i][2], a[i][3], a[i][4], a[i][5], a[i][6], 
+				  __mu[0], __mu[1], __mu[2], __mu[3], __mu[4], __mu[5], __mu[6],
+            	  __p[0], __p[1], __p[2], __p[3], __p[4], __p[5], __p[6]);
+
+    for (uint32_t j = 0; j < LIMBS; j++) {
+		out[i*LIMBS + j] = c[j];
+	}
 }
 
 
@@ -318,7 +324,7 @@ void test_sqr_fp() {
     cudaDeviceSynchronize();
 
     for (i = 0; i < TESTS; i++) {
-        if (compare(&c[i], &sqr_fp_ok[i])) {
+        if (compare(&c[i], sqr_fp_ok[i])) {
             printf("(%i) FAIL\n", i);
             /*
             printf("(%d) 0x%.16lX%.16lX%.16lX\n", i, c[2],c[1],c[0]);

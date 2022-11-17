@@ -1,3 +1,7 @@
 .local-history/
+.cache/
+
 Session.vim
 build/
+cmake-build-release/
+cmake-build-debug/

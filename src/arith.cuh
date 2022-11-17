@@ -777,6 +777,9 @@ asm volatile("{\n\t"                            \
 		: "r"(a0), "r"(a1),    			 		 /*4,5*/     		\
 		  "r"(b0), "r"(b1));   					 /*6,11*/
 
+// TODO not finished
+#define __fp_mul64_32(c0,c1,c2,c3,a0,a1,b0,b1,mu0,mu1) \
+	__karatsuba32_2x2(c0,c1,c2,c3,a0,a1,b0,b1) 
 
 // 1limb times 2limbs karatsuba multiplication 
 #define __karatsuba32_1x2(c0,c1,c2,a0,b0,b1)\
@@ -3694,6 +3697,9 @@ asm volatile("{\n\t"                            \
 // TODO not implemented
 #define __karatsuba32_5x5(c0,c1,c2,c3,c4,c5,c6,c7,c8,c9,a0,a1,a2,a3,a4,b0,b1,b2,b3,b4)
 
+// TODO not implemented
+#define __sqr160_32(c0,c1,c2,c3,c4,c5,c6,c7,c8,c9,a0,a1,a2,a3,a4)
+
 #define __mul160_32(c0,c1,c2,c3,c4,c5,c6,c7,c8,c9,a0,a1,a2,a3,a4,b0,b1,b2,b3,b4)\
 	__school32_5x5(c0,c1,c2,c3,c4,c5,c6,c7,c8,c9,a0,a1,a2,a3,a4,b0,b1,b2,b3,b4)
 
@@ -4173,6 +4179,10 @@ asm volatile("{\n\t"                            \
 
 #define __mul6x6_32(c0,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,a0,a1,a2,a3,a4,a5,b0,b1,b2,b3,b4,b5)	\
 	__karatsuba32_6x6(c0,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,a0,a1,a2,a3,a4,a5,b0,b1,b2,b3,b4,b5)
+
+
+// TODO not implemented
+#define __sqr6x6_32(c0,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,a0,a1,a2,a3,a4,a5)
 
 // second part of the montgomery reduction written by andre
 #define __reduce32_inplace_sec6x6(a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11, p0,p1,p2,p3,p4,p5, i0,i1,i2,i3,i4,i5,i6,i7,i8,i9,i10,i11)	 	\
@@ -4898,6 +4908,8 @@ asm volatile("{\n\t"                            \
 #define __mul7x7_32(c0,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13, a0,a1,a2,a3,a4,a5,a6, b0,b1,b2,b3,b4,b5,b6) \
  	__karatsuba32_7x7(c0,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13, a0,a1,a2,a3,a4,a5,a6, b0,b1,b2,b3,b4,b5,b6)
 
+// TODO not implemented
+#define __sqr7x7_32(c0,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13, a0,a1,a2,a3,a4,a5,a6)
 // TODO describe
 #define __reduce32_sec7x7(c0,c1,c2,c3,c4,c5,c6, a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13, p0,p1,p2,p3,p4,p5,p6, i0,i1,i2,i3,i4,i5,i6,i7,i8,i9,i10,i11,i12,i13) \
         asm volatile ("{\n\t"									\
@@ -4978,6 +4990,8 @@ asm volatile("{\n\t"                            \
 	__school32_7x7(t0,t1,t2,t3,t4,t5,t6,t7,t8,t9,t10,t11,t12,t13, c0,c1,c2,c3,c4,c5,c6, p0,p1,p2,p3,p4,p5,p6) 									\
 	__reduce32_sec7x7(c0,c1,c2,c3,c4,c5,c6, f0,f1,f2,f3,f4,f5,f6,f7,f8,f9,f10,f11,f12,f13, p0,p1,p2,p3,p4,p5,p6, t0,t1,t2,t3,t4,t5,t6,t7,t8,t9,t10,t11,t12,t13)
 
+/// not implemented
+#define __fp_sqr7x7_32(c0,c1,c2,c3,c4,c5,c6, a0,a1,a2,a3,a4,a5,a6, mu0,mu1,mu2,mu3,mu4,mu5,mu6, p0,p1,p2,p3,p4,p5,p6)
 ////////////////////////////////////////////////////////////////////////////////
 // 									8x8										  //
 ////////////////////////////////////////////////////////////////////////////////
@@ -5167,6 +5181,9 @@ asm volatile("{\n\t"                            \
 	  "=r"(c8),"=r"(c9),"=r"(c10),"=r"(c11),"=r"(c12),"=r"(c13),"=r"(c14),"=r"(c15)     /*8, 15*/ \
 	: "r"(a0), "r"(a1), "r"(a2), "r"(a3), "r"(a4), "r"(a5), "r"(a6), "r"(a7),       	/*16,23*/ \
 	  "r"(b0), "r"(b1), "r"(b2), "r"(b3), "r"(b4), "r"(b5), "r"(b6), "r"(b7));      	/*24,31*/
+
+#define __mul256_32(c0,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,a0,a1,a2,a3,a4,a5,a6,a7,b0,b1,b2,b3,b4,b5,b6,b7)\
+	__school32_8x8(c0,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,a0,a1,a2,a3,a4,a5,a6,a7,b0,b1,b2,b3,b4,b5,b6,b7)
 
 // first part of montgomery reduction 
 // essential its a multiplication a*mu mod 2**256

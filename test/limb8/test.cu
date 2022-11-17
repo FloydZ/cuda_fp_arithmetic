@@ -4,7 +4,7 @@
 
 
 #include "test_vecs.cuh"
-#include "../arith.cuh"
+#include "../../src/arith.cuh"
 
 
 static inline int compare(const limb_t *a, 

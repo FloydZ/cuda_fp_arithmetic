@@ -2,7 +2,7 @@ Fp Implementation written in CUDA/PTX
 -----
 This repo contains a highly optimized Fp implementation in CUDA PTX. No 
 parallelisation is used, meaning that every thread is doing the same. The 
-reduction is implementedas the Montgomery reduction. For the multiplication 
+reduction is implemented as the Montgomery reduction. For the multiplication 
 either the schoolbook or karatsuba implementation can be used. Also combinations
 of both can be used. Additionally a everything is implemented either with 32- 
 or 64 bit limbs.
@@ -28,7 +28,6 @@ sudo pacman -S make cmake cuda
 nix-shell
 ```
 
-
 Then run the following to setup the code:
 ```bash
 git clone https://github.com/FloydZ/cuda_fp_arithmetic
@@ -37,6 +36,9 @@ cd build
 cmake ..
 make
 ```
+
+Usage:
+---
 
 You can either test the code via:
 ```bash
@@ -50,5 +52,7 @@ You can either test the code via:
 
 or run benchmarks via:
 ```bash
-bench
+cd build
+make bench
+./bench
 ```
