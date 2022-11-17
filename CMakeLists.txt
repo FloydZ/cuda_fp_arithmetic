@@ -4,9 +4,9 @@ project(cuda_fp_arithmetic)
 enable_language(CUDA)
 
 # enable languages
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CUDA_STANDARD 17)
-set(CMAKE_CUDA_STANDARD_REQUIRED True)
+# set(CMAKE_CXX_STANDARD 20)
+# set(CMAKE_CUDA_STANDARD 17)
+# set(CMAKE_CUDA_STANDARD_REQUIRED True)
 
 # verbose output and create `compile_commands.json`
 set(CMAKE_VERBOSE_MAKEFILE ON)
