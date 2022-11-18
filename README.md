@@ -56,3 +56,13 @@ cd build
 make bench
 ./bench
 ```
+
+You can also generate test cases on you own via the script `python test_gen.py`.
+Its possible to tune the number of variables via `-t XXX`, the bitlength of the
+underlying limbs (either 32- or 64-bits limbs) and its possible to tune the
+number of limbs (\in [2, ..., 8]).
+Example:
+```bash
+python test_gen.py -l 6 -t 80 -b 32
+```
+will generate 80 different tests for 6 limb arithmetic based on 32bit limbs

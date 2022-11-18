@@ -3,6 +3,9 @@
 import math
 import random
 import time
+import argparse
+
+
 ceildiv = lambda x, y: -(-x//y)
 int2str = lambda x,  string: string.format(x)
 
@@ -108,43 +111,80 @@ def gen_op(p, mu, arch=32):
 if __name__ == "__main__":
     time_ns = time.monotonic_ns()
     random.seed(time_ns)
+
+    parser = argparse.ArgumentParser(description='Test generator.')
+
+    parser.add_argument('-b', '--bitlength', type=int,
+                        help="Number of bits, either 32 or 64")
+    parser.add_argument('-l', '--limb', type=int,
+                        help="Number of limbs, a number between 2 and 8")
+    parser.add_argument('-t', '--test', type=int,
+                        help="Number of tests to generate")
+    args = parser.parse_args()
+
     BITLENGTH = 32
+
+    if args.bitlength:
+        if args.bitlength not in [32, 64]:
+            print("BITLENGTH must be either 32 or 64")
+            exit(1)
+
+        BITLENGTH = args.bitlength
+
+    LIMBS = 2
+    if args.limb:
+        if args.limb < 2 or args.limb > 8:
+            print("LIMB must be in [2, ..., 8]")
+            exit(2)
+        LIMBS = args.limb
+
+    if args.test:
+        TESTS = args.test
+
+    e2, e3, f = 1, 1, 1
 
     # the challenge parameters
     # 2 limbs
-    # e2 = 24
-    # e3 = 18
-    # f = 21
+    if LIMBS == 2:
+        e2 = 24
+        e3 = 18
+        f = 21
 
     # 3 limbs
-    # e2 = 32
-    # e3 = 20
-    # f = 23
+    if LIMBS == 3:
+        e2 = 32
+        e3 = 20
+        f = 23
 
     # 4 limbs
-    e2 = 58
-    e3 = 36
-    f = 743
+    if LIMBS == 4:
+        e2 = 58
+        e3 = 36
+        f = 743
 
     # 5 limbs
-    # e2 = 64
-    # e3 = 43
-    # f = 17
+    if LIMBS == 5:
+        e2 = 64
+        e3 = 43
+        f = 17
 
     # 6 limbs
-    # e2 = 91
-    # e3 = 57
-    # f = 1
+    if LIMBS == 6:
+        e2 = 91
+        e3 = 57
+        f = 1
 
     # 7 limbs
-    # e2 = 110
-    # e3 = 67
-    # f = 1
+    if LIMBS == 7:
+        e2 = 110
+        e3 = 67
+        f = 1
 
     # 8 limbs
-    # e2 = 113
-    # e3 = 83
-    # f = 38
+    if LIMBS == 8:
+        e2 = 113
+        e3 = 83
+        f = 38
 
     p = 2**e2 * 3**e3 * f - 1
     w = math.ceil(p.bit_length() / BITLENGTH)
