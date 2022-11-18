@@ -34,9 +34,9 @@ jobs:
           # - os: ubuntu-18.04
           #   cuda: "10.2"
           #   gcc: 8
-          - os: ubuntu-18.04
-            cuda: "10.1"
-            gcc: 8
+          # - os: ubuntu-18.04
+          #   cuda: "10.1"
+          #   gcc: 8
 
           # 16.04 runners are deprecated / removed in september 2021.
           # It should still be possible to install CUDA 8 - CUDA 10 in 18.04 images by using the 16.04 repository, although milage may vary.
