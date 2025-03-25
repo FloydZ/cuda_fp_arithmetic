@@ -1,6 +1,6 @@
 .local-history/
 .cache/
-
+.idea/
 Session.vim
 build/
 cmake-build-release/
