@@ -20,6 +20,7 @@ stdenv.mkDerivation {
      procps
 	 gnumake
 	 cmake
+	 clang
 	 util-linux
 	 m4
 	 gperf
